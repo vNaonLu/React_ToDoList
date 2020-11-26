@@ -3,33 +3,36 @@ import globalContext from '../misc/context';
 import { useContext } from 'react';
 
 const ToDo = ({todo}) => {
-  const {tasks,setTasks} = useContext(globalContext);
+  const {totalTasks,setTotalTasks} = useContext(globalContext);
 
   const handleClick = (e)=>{    
-    const updatedTask = tasks.map(task=>{
-      return task.id === todo.id ? {...task, complete: !task.complete} : {...task};
+    console.log(`${todo.task} has been ${todo.complete?"unchecked":"checked"}`)
+    const updatedTask = totalTasks.map(task=>{
+      return task.id === todo.id ? {...task, complete: !todo.complete} : {...task};
     });
-    setTasks(updatedTask);
+    setTotalTasks(updatedTask);
   }
   return(
-    <div className={todo.id%2?"todo-container":"todo-container even-list"}>
-      <input type="checkbox" checked={todo.complete ? "checked" : ""} onClick={handleClick}></input>
+    <li className={todo.id%2?"todo-container":"todo-container even-list"}>
+      <input type="checkbox" checked={todo.complete ? "checked" : ""} onChange={handleClick}></input>
       <div className={todo.complete ? "todo-done" : "todo-notyet"} onClick={handleClick}>
           {todo.task}
       </div>
-    </div>
+    </li>
   )
 }
 
 const ToDoList = ({todoList})=>{
+  const {hideIncomplete,totalTasks} = useContext(globalContext);
   return(
-    <div>
-      {todoList.map((todo, i)=>{
-          return(
-            <ToDo todo={todo} />
-          )
+    <ul className="todolist">
+      {totalTasks.map((todo, i)=>{
+          return (!hideIncomplete || (hideIncomplete && !todo.complete)) ?
+            (
+              <ToDo key={i} todo={todo} />
+            ) : null
       })}
-    </div>
+    </ul>
   )
 }
 

@@ -1,3 +1,7 @@
+.todolist {
+  align-items: center;
+}
+
 .todo-container {
   height: 30px;
   display: flex;

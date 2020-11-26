@@ -1,33 +1,44 @@
-import logo from './logo.svg';
 import Header from './components/header';
 import ToDoList from './components/todoList';
+import { FilterButton,AddNewTask } from './components/userInput';
 import data from './misc/example.json'
 import { useState, useEffect } from 'react';
-import globalContext, { Provider } from './misc/context';
+import { Provider } from './misc/context';
 import './App.css';
 
 function App() {
 
-  const [tasks, setTasks] = useState(data);
-
-  const contextValue = {
-    tasks, 
-    setTasks
-  };
+  const [hideIncomplete, setHideIncomplete] = useState(false);
+  const [totalTasks, setTotalTasks] = useState(data);
 
   useEffect(()=>{
+    changeTitle();
+  });
+
+  const changeTitle = ()=>{
     let leftTask = 0;
-    tasks.forEach(task=>{
+    totalTasks.forEach(task=>{
       if(!task.complete) leftTask++;
     });
-    document.title=`TodoList - ${leftTask==0 ? `Done` : `left ${leftTask} tasks`}.`;
-  });
+    document.title=`TodoList - ${leftTask===0 ? `Done` : `left ${leftTask} tasks`}.`;
+  };
+
+
+  const contextValue = {
+    hideIncomplete,
+    setHideIncomplete,
+    totalTasks,
+    setTotalTasks,
+  };
 
   return (
     <div className="App">
       <Provider value={contextValue}>
         <Header />
-        <ToDoList todoList={tasks} />
+        <AddNewTask />
+        <FilterButton />
+        <br/>
+        <ToDoList />
       </Provider>
     </div>
   );
