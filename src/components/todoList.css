@@ -18,3 +18,8 @@
 .todo-done {
   text-decoration: line-through;
 }
+
+.complete-message {
+  position: relative;
+  color: gray;
+}

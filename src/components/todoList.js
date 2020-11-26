@@ -27,7 +27,9 @@ const ToDoList = ({todoList})=>{
   const filteredTask = totalTasks.filter((task)=>(!hideIncomplete || (hideIncomplete && !task.complete)));
   return(
     <ul className="todolist">
-      {filteredTask.map((todo, i)=>{
+      {filteredTask.length===0?
+        <div className="complete-message">All tasks have been done.</div>:
+        filteredTask.map((todo, i)=>{
           return <ToDo key={i} todo={todo} index={i} />
       })}
     </ul>
