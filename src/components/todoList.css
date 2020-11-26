@@ -1,0 +1,12 @@
+.todo-container {
+  height: 30px;
+  display: flex;
+}
+
+/* .even-list {
+  background-color: grey;
+} */
+
+.todo-done {
+  text-decoration: line-through;
+}
