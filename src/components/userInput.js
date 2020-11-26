@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import globalContext from '../misc/context';
+import './userInput.scss';
 
 const FilterButton = ()=>{  
   const { hideIncomplete, setHideIncomplete } = useContext(globalContext);
@@ -26,12 +27,12 @@ const AddNewTask = ()=>{
     setTotalTasks([
       ...totalTasks,
       {
-        "id": totalTasks.length,
+        "id": totalTasks.length + 1,
         "task": inputText,
         "complete": false
       }
     ]);
-    console.log(`New task "${inputText} added."`);
+    console.log(`New task#${totalTasks.length + 1} "${inputText} added."`);
     setInputTask("");
   }
 
@@ -41,10 +42,10 @@ const AddNewTask = ()=>{
   }
 
   return (
-    <div>
+    <div className="text-field">
       <input
         type="text"
-        placeholder="Enter some task"
+        placeholder={`Enter some task, press "Enter" to add.`}
         onChange={(e)=>setInputTask(e.target.value)}
         onKeyDown={enterSomeKey}
         value={inputText}

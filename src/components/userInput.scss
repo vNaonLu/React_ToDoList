@@ -1,0 +1,15 @@
+.filter-button {
+  position: relative;
+  width: 50%;
+  left: 20%;
+  display: flex;
+}
+
+.text-field {
+  width: 100%;
+
+  > input {
+    position: relative;
+    width: 60%;
+  }
+}
