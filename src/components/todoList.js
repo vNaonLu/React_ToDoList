@@ -13,7 +13,7 @@ const ToDo = ({index, todo}) => {
     setTotalTasks(updatedTask);
   }
   return(
-    <li className={index%2?"todo-container":"todo-container even-item"}>
+    <li className={!(index%2)?"todo-container":"todo-container even-item"}>
       <input type="checkbox" checked={todo.complete ? "checked" : ""} onChange={handleClick}></input>
       <div className={todo.complete ? "todo-done" : "todo-notyet"} onClick={handleClick}>
           {todo.task}
